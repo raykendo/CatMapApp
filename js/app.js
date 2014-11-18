@@ -79,7 +79,7 @@ require([
 		// set the renderer
 		var renderer = new Renderer({
 			"type": "simple",
-			"label": "A Kitteh",
+			"label": "Kitty!",
 			"description": "Here be a kitteh",
 			"symbol": {
 				"type" : "esriPMS", 
@@ -176,10 +176,7 @@ require([
 					if (featureLayer.featureSet && featureLayer.featureSet.features && featureLayer.featureSet.features.length > 998) {
 						oldkittehs = featureLayer.featureSet.features.slice(999);
 					}
-					featureLayer.featureSet.features.push(kitteh);
-					if (featureLayer.featureSet.features.length === 1000) {
-						featureLayer.featureSet.features.shift();
-					}
+					featureLayer.applyEdits([kitteh], null, oldkittehs.length ? [oldkittehs] : null);
 					featureLayer.refresh();
 					catCall();
 					console.log("cat added");
