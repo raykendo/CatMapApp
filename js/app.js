@@ -83,9 +83,8 @@ require([
 			"description": "Here be a kitteh",
 			"symbol": {
 				"type" : "esriPMS", 
-				"url" : "471E7E31", 
-				"imageData" : "iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAB3RJTUUH3gsSDwcUN+d8fQAAAkZJREFUSMedljtoFVEQhr+7yb3GR6MJBEmjUXwgxNhYWEUEtdDCQhQsrFJoYyMIIliJKCFgkSIGRK2Mj0bB1tIm+MAHPtBCiFgoAbkxyc3NXZt/ZDI5u2oGhrM755x5/TOzC2nKgHZgl9Yy2gRsoERRiqrAFmAQaBYYaXM6zgRZqYEMmAP6gaPAIRmphjMLwEXgLtDBf9IeIAdmtF6XvOIifK29htaekowsoVdO+S+tB9z+ecmaiiQH7hdlJQpWAZPAvC4aj2l/BfAy7DWATwl9WaawPYgNoJWIqhuoKT2bnTwXuN8Tdzoy4Biw0gmbwGfnndG0y3fdyRfk9S29e+cGAYaBO8AQ0KuNrU7RtJ5POqBvSzanddKlphe4BIyY0Ss6NC/eq4P7BHALGA1VtB54p4g+qIIA9uu8RX8Z4KdebOM5sDo0XRF1aa0J/CnpsMr6CjAbKiIXiLVg4ATwUI113EVkqTnoSjd3qeORE1gU26XYWn8s7OfAzeDA6eD9nwbtC97XVZJWuudCV/vns87IjqBnFthmuRwAngDPgMMux7tdAeQJBbkcNDolDO8BO1Md3eZAWwN8SSiOPKGzmZuoyZnU7vLZBbxJ5L2IH8sIAbskrQPeJwArYquap3+boNZE1/5BaWRzZKjMQBVYC3xbhgHjt0Cnc3YRGBV1YzfLpx7X3UsMWDnWCy4b4K0wZT1NxftZGNM/gBslGM1oglYKzjzQeMgjsIs+EsAF4IgwmdD394X6ogps1E9Bn5rxIzAOXI3KfgP4hegXhlTmqgAAAABJRU5ErkJggg==", 
-				"contentType" : "image/png", 
+				"url" : "http://placekitten.com/g/24/24", 
+				"contentType" : "image/jpg", 
 				"width" : 24, 
 				"height" : 24, 
 				"angle" : 0, 
@@ -174,10 +173,10 @@ require([
 						oldkittehs = featureLayer.featureSet.features.slice(999);
 					}
 					featureLayer.applyEdits([kitteh], null, oldkittehs);
+					featureLayer.refresh();
 					catCall();
 				} catch(e) {
 					console.log(e);
-					console.log(featureLayer);
 					window.clearInterval(addKittehs);
 				}
 				
