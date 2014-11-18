@@ -168,12 +168,12 @@ require([
 			var addKittehs = window.setInterval(function () {
 				try {
 					var kitteh = generateTheKittehs(map);
-					var oldKitteh = layer.featureSet.features.slice(1000);
-					layer.applyEdits([kitteh], null, oldKitteh);
+					var oldKitteh = featureLayer.featureSet.features.slice(1000);
+					featureLayer.applyEdits([kitteh], null, oldKitteh);
 					catCall();
 				} catch(e) {
 					console.log(e);
-					console.log(layer);
+					console.log(featureLayer);
 					window.clearInterval(addKittehs);
 				}
 				
