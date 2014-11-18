@@ -164,7 +164,7 @@ require([
 		
 		map.on('layers-add-result', function () {
 			// add a new kitteh every second.
-			console.log("layers added");
+			console.log("layers added2");
 			var addKittehs = window.setInterval(function () {
 				try {
 					var kitteh = generateTheKittehs(map),
@@ -175,16 +175,19 @@ require([
 					featureLayer.applyEdits([kitteh], null, oldkittehs);
 					featureLayer.refresh();
 					catCall();
+					console.log("cat added");
 				} catch(e) {
 					console.log(e);
 					window.clearInterval(addKittehs);
 				}
 				
-			}, 1000);
+			}, 2000);
 		
 		});
 		
 		map.addLayers([featureLayer]);
+		console.log("layer added 1");
+		
 		} catch(e) {
 			console.log(e);
 		}
