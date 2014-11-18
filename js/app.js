@@ -30,7 +30,7 @@ require([
 	var deferred = arcgisUtils.createMap("c256d4a2110847aebc43ab5b9534cd87", "map", {});
 	
 	function catCall () {
-		var fileName = audioSources[index % audioSources.length];
+		var fileName = audioSources[index++ % audioSources.length];
 		
 		var audio = new Audio();
 		audio.src = Modernizr.audio.ogg ? fileName + '.ogg' :
@@ -144,14 +144,11 @@ require([
 		var geometry = randomPoint(map.extent);
 		
 		var attributes = {
-			"ObjectID": index++,
 			"NAME": randomName(),
-			"IMG_URL": randomImage
+			"IMG_URL": randomImage()
 		};
 		return new Graphic(geometry, attributes);
 	}
-	
-	
 	
 	deferred.then(function (response) {
 		var map = response.map;
@@ -171,7 +168,6 @@ require([
 			var addKittehs = window.setInterval(function () {
 				try {
 					var kitteh = generateTheKittehs(map);
-					console.log(layer);
 					var oldKitteh = layer.featureSet.features.slice(1000);
 					layer.applyEdits([kitteh], null, oldKitteh);
 					catCall();
