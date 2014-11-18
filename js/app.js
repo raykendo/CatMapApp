@@ -152,7 +152,7 @@ require([
 		};
 		
 		console.log("kitty data", attributes);
-		return new Graphic(geometry, attributes);
+		return new Graphic(geometry, null, attributes);
 	}
 	
 	deferred.then(function (response) {
