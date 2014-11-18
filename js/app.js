@@ -71,7 +71,6 @@ require([
 		});
 		
 		var featureLayer = new FeatureLayer(featureCollection, {
-			mode: FeatureLayer.MODE_SNAPSHOT,
 			id: 'kittehlayer',
 			infoTemplate: popupTemplate
 		});
