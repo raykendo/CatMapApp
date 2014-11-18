@@ -75,7 +75,7 @@ require([
 		},
 		popupTemplate = new PopupTemplate({
 			"title": "${NAME}",
-			"content": "<div><img src='${IMG_URL}' width='${WIDTH}' height='${HEIGHT}' title='${NAME} photo' alt='${NAME} photo' /></div>"
+			"description": "<div><img src='${IMG_URL}' width='${WIDTH}' height='${HEIGHT}' title='${NAME} photo' alt='${NAME} photo' /></div>"
 		});
 		
 		var featureLayer = new FeatureLayer(featureCollection, {
