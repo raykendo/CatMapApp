@@ -185,6 +185,7 @@ require([
 					console.log("cat added");
 				} catch(e) {
 					console.log(e);
+					console.log(featureLayer);
 					window.clearInterval(addKittehs);
 				}
 				
