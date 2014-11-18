@@ -150,16 +150,19 @@ require([
 		
 		// add random kitteh data
 		var layer = getTheKittehLayer();
+		console.log(layer);
 		map.addLayer(layer);
 		
 		// add a new kitteh every second.
-		window.setInterval(function () {
+		var addKittehs = window.setInterval(function () {
 			try {
 				var kitteh = generateTheKittehs(map);
+				console.log(layer);
 				var oldKitteh = layer.featureSet.features.slice(1000);
 				layer.applyEdits([kitteh], null, oldKitteh);
 			} catch(e) {
 				console.log(e);
+				window.clearInterval(addKittehs);
 			}
 			
 		}, 1000);
