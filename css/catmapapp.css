@@ -1,0 +1,32 @@
+html, body, #map {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	border: 0;
+	padding: 0;
+}
+
+html, body {
+	overflow: hidden;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 14px;
+}
+
+@font-face {
+    font-family: 'firecatmedium';
+    src: url('../fonts/FirecatMedium-webfont.eot');
+    src: url('../fonts/FirecatMedium-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/FirecatMedium-webfont.woff') format('woff'),
+         url('../fonts/FirecatMedium-webfont.ttf') format('truetype'),
+         url('../fonts/FirecatMedium-webfont.svg#firecatmedium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 2px 0;
+	padding: 0;
+	font-family: 'firecatmedium', Helvetica, Arial, sans-serif;
+}
+
