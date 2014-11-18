@@ -151,8 +151,10 @@ require([
 	}
 	
 	deferred.then(function (response) {
-		var map = response.map;
+		try {
 		
+		var map = response.map;
+		console.log("map loaded");
 		// add random kitteh data
 		var featureLayer = getTheKittehLayer();
 		
@@ -161,15 +163,17 @@ require([
           map.infoWindow.setFeatures([evt.graphic]);
         });
 		
-		map.addLayers([featureLayer]);
-		
 		map.on('layers-add-result', function () {
 			// add a new kitteh every second.
+			console.log("layers added");
 			var addKittehs = window.setInterval(function () {
 				try {
-					var kitteh = generateTheKittehs(map);
-					var oldKitteh = featureLayer.featureSet.features.slice(1000);
-					featureLayer.applyEdits([kitteh], null, oldKitteh);
+					var kitteh = generateTheKittehs(map),
+						oldkittehs = [];
+					if (featureLayer.featureSet && featureLayer.featureSet.features && featureLayer.featureSet.features.length > 998) {
+						oldkittehs = featureLayer.featureSet.features.slice(999);
+					}
+					featureLayer.applyEdits([kitteh], null, oldkittehs);
 					catCall();
 				} catch(e) {
 					console.log(e);
@@ -181,7 +185,10 @@ require([
 		
 		});
 		
-		
+		map.addLayers([featureLayer]);
+		} catch(e) {
+			console.log(e);
+		}
 		
 	});
 });
