@@ -25,11 +25,12 @@ require([
 		"./audio/222590__queen-westeros__cat-scream"
 	],
 		index = 0;
+		
 	
 	var deferred = arcgisUtils.createMap("c256d4a2110847aebc43ab5b9534cd87", "map", {});
 	
 	function catCall () {
-		var fileName = audioSources[index++ % audioSources.length];
+		var fileName = audioSources[index % audioSources.length];
 		
 		var audio = new Audio();
 		audio.src = Modernizr.audio.ogg ? fileName + '.ogg' :
@@ -42,7 +43,12 @@ require([
 	function getTheKittehLayer() {
 		var layerDefinition = {
 			"geometryType": "esriGeometryPoint",
+			"objectIdField": "ObjectID",
 			"fields": [{
+				"name": "ObjectID",
+				"alias": "ObjectID",
+				"type": "esriFieldTypeOID"
+			}, {
 				"name": "NAME",
 				"type": "esriFieldTypeString",
 				"alias": "Name"
@@ -138,6 +144,7 @@ require([
 		var geometry = randomPoint(map.extent);
 		
 		var attributes = {
+			"ObjectID": index++,
 			"NAME": randomName(),
 			"IMG_URL": randomImage
 		};
@@ -167,6 +174,7 @@ require([
 					console.log(layer);
 					var oldKitteh = layer.featureSet.features.slice(1000);
 					layer.applyEdits([kitteh], null, oldKitteh);
+					catCall();
 				} catch(e) {
 					console.log(e);
 					console.log(layer);
