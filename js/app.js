@@ -154,9 +154,13 @@ require([
 		
 		// add a new kitteh every second.
 		window.setInterval(function () {
-			var kitteh = generateTheKitteh();
-			var oldKitteh = layer.featureSet.features.slice(1000);
-			layer.applyEdits([kitteh], null, oldKitteh);
+			try {
+				var kitteh = generateTheKittehs(map);
+				var oldKitteh = layer.featureSet.features.slice(1000);
+				layer.applyEdits([kitteh], null, oldKitteh);
+			} catch(e) {
+				console.log(e);
+			}
 			
 		}, 1000);
 		
