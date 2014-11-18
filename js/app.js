@@ -176,7 +176,10 @@ require([
 					if (featureLayer.featureSet && featureLayer.featureSet.features && featureLayer.featureSet.features.length > 998) {
 						oldkittehs = featureLayer.featureSet.features.slice(999);
 					}
-					featureLayer.applyEdits([kitteh], null, oldkittehs);
+					featureLayer.featureSet.features.push(kitteh);
+					if (featureLayer.featureSet.features.length === 1000) {
+						featureLayer.featureSet.features.shift();
+					}
 					featureLayer.refresh();
 					catCall();
 					console.log("cat added");
