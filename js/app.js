@@ -94,7 +94,7 @@ require([
 				}
 			}
 		});
-		
+		console.log(renderer);
 		featureLayer.setRenderer(renderer);
 
 		return featureLayer;
@@ -151,8 +151,10 @@ require([
 			"IMG_URL": randomImage()
 		};
 		
-		console.log("kitty data", attributes);
-		return new Graphic(geometry, null, attributes);
+		var g = new Graphic(geometry);
+		g.setAttributes(attributes);
+		
+		return g;
 	}
 	
 	deferred.then(function (response) {
