@@ -49,6 +49,14 @@ require([
 				"alias": "ObjectID",
 				"type": "esriFieldTypeOID"
 			}, {
+				"name": "WIDTH",
+				"type": "esriFieldTypeInteger",
+				"alias": "Width"
+			}, {
+				"name": "HEIGHT",
+				"type": "esriFieldTypeInteger",
+				"alias": "Height"
+			}, {
 				"name": "NAME",
 				"type": "esriFieldTypeString",
 				"alias": "Name"
@@ -67,7 +75,7 @@ require([
 		},
 		popupTemplate = new PopupTemplate({
 			"title": "${NAME}",
-			"content": "<img src='${IMG_URL}' title='${NAME} photo' alt='${NAME} photo' />"
+			"content": "<div><img src='${IMG_URL}' width='${WIDTH}' height='${HEIGHT}' title='${NAME} photo' alt='${NAME} photo' /></div>"
 		});
 		
 		var featureLayer = new FeatureLayer(featureCollection, {
@@ -81,20 +89,16 @@ require([
 			"label": "Kitty!",
 			"description": "Here be a kitteh",
 			"symbol": {
-				"type" : "esriSMS", 
-				"style": "esriSMSCircle",
-				"color": [255,255,0, 255],
-				"size": 12,
+				"type" : "esriPMS", 
+				"imageData": "iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAB3RJTUUH3gsSDwcUN+d8fQAAAkZJREFUSMedljtoFVEQhr+7yb3GR6MJBEmjUXwgxNhYWEUEtdDCQhQsrFJoYyMIIliJKCFgkSIGRK2Mj0bB1tIm+MAHPtBCiFgoAbkxyc3NXZt/ZDI5u2oGhrM755x5/TOzC2nKgHZgl9Yy2gRsoERRiqrAFmAQaBYYaXM6zgRZqYEMmAP6gaPAIRmphjMLwEXgLtDBf9IeIAdmtF6XvOIifK29htaekowsoVdO+S+tB9z+ecmaiiQH7hdlJQpWAZPAvC4aj2l/BfAy7DWATwl9WaawPYgNoJWIqhuoKT2bnTwXuN8Tdzoy4Biw0gmbwGfnndG0y3fdyRfk9S29e+cGAYaBO8AQ0KuNrU7RtJ5POqBvSzanddKlphe4BIyY0Ss6NC/eq4P7BHALGA1VtB54p4g+qIIA9uu8RX8Z4KdebOM5sDo0XRF1aa0J/CnpsMr6CjAbKiIXiLVg4ATwUI113EVkqTnoSjd3qeORE1gU26XYWn8s7OfAzeDA6eD9nwbtC97XVZJWuudCV/vns87IjqBnFthmuRwAngDPgMMux7tdAeQJBbkcNDolDO8BO1Md3eZAWwN8SSiOPKGzmZuoyZnU7vLZBbxJ5L2IH8sIAbskrQPeJwArYquap3+boNZE1/5BaWRzZKjMQBVYC3xbhgHjt0Cnc3YRGBV1YzfLpx7X3UsMWDnWCy4b4K0wZT1NxftZGNM/gBslGM1oglYKzjzQeMgjsIs+EsAF4IgwmdD394X6ogps1E9Bn5rxIzAOXI3KfgP4hegXhlTmqgAAAABJRU5ErkJggg==",
+				"contentType" : "image/png", 
+				"width" : 24, 
+				"height" : 24, 
 				"angle" : 0, 
 				"xoffset" : 0, 
-				"yoffset" : 0,
-				"outline" : {
-					"color": [0,255,0, 255],
-					"width": 1
-				}
+				"yoffset" : 0
 			}
 		});
-		console.log(renderer);
 		featureLayer.setRenderer(renderer);
 
 		return featureLayer;
@@ -133,22 +137,26 @@ require([
 		return list[Math.floor(Math.random() * list.length)];
 	}
 	
-	function randomImage () {
+	function randomImage (width, height) {
 		return [
 			"http://placekitten.com/g", 
-			Math.ceil(Math.random() * 100) + 200,
-			Math.ceil(Math.random() * 100) + 200
+			width,
+			height
 		].join("/");
 	}
 	
 	// @param {esri.Map} map
 	// @returns {esri.Graphic} a randomized cat graphic
 	function generateTheKittehs(map) {
-		var geometry = randomPoint(map.extent);
+		var geometry = randomPoint(map.extent),
+			width = Math.ceil(Math.random() * 100) + 200,
+			height = Math.ceil(Math.random() * 100) + 200;
 		
 		var attributes = {
 			"NAME": randomName(),
-			"IMG_URL": randomImage()
+			"WIDTH": width,
+			"HEIGHT": height,
+			"IMG_URL": randomImage(width, height)
 		};
 		
 		var g = new Graphic(geometry);
