@@ -1,6 +1,8 @@
 // external object: Modernizr
 
 require([
+	"dojo/query",
+	"dojo/dom-class",
 	"esri/arcgis/utils",
 	"esri/layers/FeatureLayer",
 	"esri/renderers/SimpleRenderer",
@@ -8,8 +10,10 @@ require([
 	"esri/dijit/PopupTemplate",
 	"esri/geometry/Extent",
 	"esri/geometry/Point",
-	"esri/graphic"
+	"esri/graphic",
+	"dojo/domReady!"
 ], function (
+	dojoQuery, domClass,
 	arcgisUtils, FeatureLayer, Renderer, FeatureSet, PopupTemplate, Extent, Point, Graphic
 ) {
 	var audioSources = [
@@ -24,11 +28,13 @@ require([
 		"./audio/220019__chocktaw__fiji-meow-01",
 		"./audio/222590__queen-westeros__cat-scream"
 	],
-		index = 0;
+		index = 0,
+		maxCount = 150;
 		
 	
 	var deferred = arcgisUtils.createMap("c256d4a2110847aebc43ab5b9534cd87", "map", {});
 	
+	// plays an audio file through Modernizr, if available.
 	function catCall () {
 		var fileName = audioSources[index++ % audioSources.length];
 		
@@ -104,15 +110,16 @@ require([
 		return featureLayer;
 	}
 	
+	// @param {esri.geometry.Extent} extent - bounding box for the map
+	// @returns {esri.geometry.Point} - a random point within the extent provided.
 	function randomPoint (extent) {
 		var x = (Math.random() * (extent.xmax - extent.xmin)) + extent.xmin;
-		var y = (Math.random() * (extent.ymax - extent.ymin)) + extent.ymin;
-		console.log("random points: ", x, y);
-		
+		var y = (Math.random() * (extent.ymax - extent.ymin)) + extent.ymin;		
 		return new Point(x, y, extent.spatialReference);
 	}
 	
 	// names taken from http://www.petinsurance.com/healthzone/pet-articles/new-pets/top-50-wackiest-pet-names.aspx
+	// @returns {string} - random cat name in string format.
 	function randomName () {
 		var list = [
 			"Count Flufferton", 
@@ -137,6 +144,9 @@ require([
 		return list[Math.floor(Math.random() * list.length)];
 	}
 	
+	// @param {number} width - image width
+	// @param {number} height - image height
+	// @returns {string} - randomized placekitten image.
 	function randomImage (width, height) {
 		return [
 			"http://placekitten.com/g", 
@@ -150,28 +160,22 @@ require([
 	function generateTheKittehs(map) {
 		var geometry = randomPoint(map.extent),
 			width = Math.ceil(Math.random() * 100) + 200,
-			height = Math.ceil(Math.random() * 100) + 200;
+			height = Math.ceil(Math.random() * 100) + 200,
+		    attributes = {
+				"NAME": randomName(),
+				"WIDTH": width,
+				"HEIGHT": height,
+				"IMG_URL": randomImage(width, height)
+			},
+			g = new Graphic(geometry);
 		
-		var attributes = {
-			"NAME": randomName(),
-			"WIDTH": width,
-			"HEIGHT": height,
-			"IMG_URL": randomImage(width, height)
-		};
-		
-		var g = new Graphic(geometry);
-		g.setAttributes(attributes);
-		
+		g.setAttributes(attributes);		
 		return g;
 	}
 	
 	deferred.then(function (response) {
-		try {
-		
-		var map = response.map;
-		console.log("map loaded");
-		// add random kitteh data
-		var featureLayer = getTheKittehLayer();
+		var map = response.map,
+			featureLayer = getTheKittehLayer();
 		
 		//associate the features with the popup on click
         featureLayer.on("click", function(evt) {
@@ -179,35 +183,27 @@ require([
         });
 		
 		map.on('layers-add-result', function () {
-			// add a new kitteh every second.
-			console.log("layers added2");
+			// add a new kitteh every 2 second.
+			
 			var addKittehs = window.setInterval(function () {
-				try {
-					var kitteh = generateTheKittehs(map),
-						oldkittehs = [];
-					if (featureLayer.featureSet && featureLayer.featureSet.features && featureLayer.featureSet.features.length > 998) {
-						oldkittehs = featureLayer.featureSet.features.slice(999);
-					}
-					featureLayer.applyEdits([kitteh], null, oldkittehs.length ? [oldkittehs] : null);
-					featureLayer.refresh();
-					catCall();
-					console.log("cat added");
-				} catch(e) {
-					console.log(e);
-					console.log(featureLayer);
-					window.clearInterval(addKittehs);
+				var kitteh = generateTheKittehs(map),
+					oldkittehs = [];
+				if (featureLayer.featureSet && featureLayer.featureSet.features && featureLayer.featureSet.features.length > maxCount) {
+					oldkittehs = featureLayer.featureSet.features.slice(maxCount);
 				}
+				featureLayer.applyEdits([kitteh], null, oldkittehs.length ? [oldkittehs] : null);
+				featureLayer.refresh();
+				catCall();
 				
 			}, 2000);
 		
 		});
 		
 		map.addLayers([featureLayer]);
-		console.log("layer added 1");
-		
-		} catch(e) {
-			console.log(e);
-		}
-		
 	});
+	
+	// handle UI
+	var about = document.getElementById("cat-about");
+	dojoQuery(".ok-close").click(function (evt) { domClass.remove(evt.currentTarget.parentNode, "open");});
+	dojoQuery(".load-cat-about").click(function (evt) { domClass.add(about, "open"); });
 });
