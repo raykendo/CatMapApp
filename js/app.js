@@ -204,6 +204,6 @@ require([
 	
 	// handle UI
 	var about = document.getElementById("cat-about");
-	dojoQuery(".ok-close").click(function (evt) { domClass.remove(evt.currentTarget.parentNode, "open");});
-	dojoQuery(".load-cat-about").click(function (evt) { domClass.add(about, "open"); });
+	dojoQuery(".ok-close").on("click", function (evt) { domClass.remove(evt.currentTarget.parentNode, "open");});
+	dojoQuery(".load-cat-about").on("click", function (evt) { domClass.add(about, "open"); });
 });
