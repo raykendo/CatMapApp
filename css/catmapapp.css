@@ -69,18 +69,23 @@ h1, h2, h3, h4, h5, h6 {
 
 /* slider overrides */
 .esriSimpleSlider {
-	background: transparent;
+	background: rgb(76,76,76);
+	background: rgb(76,76,76,0.4);
 	border: 0;
 }
 
 .esriSimpleSlider div {
-
+	
 }
 
 .esriSimpleSliderVertical .esriSimpleSliderIncrementButton {
 	background: url('../images/CatClawUp.png') center center no-repeat;
+	line-height: 40px;
+	border-bottom: 3px solid transparent;
 }
 
 .esriSimpleSliderVertical .esriSimpleSliderDecrementButton {
-	background: url('..images/CatClawDown.png') center center no-repeat;
+	background: url('../images/CatClawDown.png') center center no-repeat;
+	line-height: 14px;
+	border-top: 3px solid transparent;
 }
