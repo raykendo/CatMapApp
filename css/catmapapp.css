@@ -41,14 +41,16 @@ h1, h2, h3, h4, h5, h6 {
 	position: absolute;
 	z-index: 150;
 	border-radius: 20%;
-	background: white;
+	background: rgba(255,255,255);
+	background: rgba(255,255,255,0.6);
 	border: 2px solid #E8A61D;
-	padding: 10px;
+	padding: 8px;
 }
 
 .load-cat-about {
 	bottom: 10px;
 	left: 10px;
+	cursor: help;
 }
 
 .cat-about {
@@ -63,4 +65,22 @@ h1, h2, h3, h4, h5, h6 {
 
 .cat-about.open {
 	display: block;
+}
+
+/* slider overrides */
+.esriSimpleSlider {
+	background: transparent;
+	border: 0;
+}
+
+.esriSimpleSlider div {
+
+}
+
+.esriSimpleSliderVertical .esriSimpleSliderIncrementButton {
+	background: url('../images/CatClawUp.png') center center no-repeat;
+}
+
+.esriSimpleSliderVertical .esriSimpleSliderDecrementButton {
+	background: url('..images/CatClawDown.png') center center no-repeat;
 }
