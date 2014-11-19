@@ -41,11 +41,14 @@ h1, h2, h3, h4, h5, h6 {
 	position: absolute;
 	z-index: 150;
 	border-radius: 20%;
+	background: white;
+	border: 2px solid #E8A61D;
+	padding: 10px;
 }
 
 .load-cat-about {
-	background: white;
-	border: 2px solid #E8A61D;
+	bottom: 10px;
+	left: 10px;
 }
 
 .cat-about {
@@ -55,7 +58,7 @@ h1, h2, h3, h4, h5, h6 {
 	top: 50%;
 	left: 50%;
 	margin: -100px 0 0 -150px;
-	text-align: middle;
+	text-align: center;
 }
 
 .cat-about.open {
