@@ -1,7 +1,7 @@
 CatMapApp
 =========
 
-A silly example of an ArcGIS Online Webmap application using cats. Ths app was inspired after seeing [this sneeze-inducing basemap](http://www.arcgis.com/home/webmap/viewer.html?webmap=c256d4a2110847aebc43ab5b9534cd87) provided by [Jonas Atkins](https://github.com/jonahadkins). This application uses the ArcGIS JavaScript API provided by ESRI to show a map, and add random cat features and popups all over the map. It also plays cat audio using Modernizr.
+A silly example of an ArcGIS Online Webmap application using cats. Ths app was inspired after seeing [this sneeze-inducing basemap](http://www.arcgis.com/home/webmap/viewer.html?webmap=c256d4a2110847aebc43ab5b9534cd87) provided by [Jonah Adkins](https://github.com/jonahadkins). This application uses the ArcGIS JavaScript API provided by ESRI to show a map, and add random cat features and popups all over the map. It also plays cat audio using Modernizr.
 
 ## Use instructions
 - Turn the volume of your desktop computer or tablet up.
@@ -10,7 +10,7 @@ A silly example of an ArcGIS Online Webmap application using cats. Ths app was i
 - Enjoy.
 
 ## Attribution
-Map Background provided by: [Jonas Atkins](https://github.com/jonahadkins)
+Map Background provided by: [Jonah Adkins](https://github.com/jonahadkins)
 
 Title font: [FireCat by David Rakowski](http://www.fontsquirrel.com/fonts/Firecat)
 
