@@ -56,10 +56,10 @@ h1, h2, h3, h4, h5, h6 {
 .cat-about {
 	display: none;
 	width: 300px;
-	height: 200px;
+	height: 220px;
 	top: 50%;
 	left: 50%;
-	margin: -100px 0 0 -150px;
+	margin: -110px 0 0 -150px;
 	text-align: center;
 }
 
@@ -69,9 +69,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* slider overrides */
 .esriSimpleSlider {
-	background: rgb(76,76,76);
-	background: rgb(76,76,76,0.4);
+	background: transparent;
 	border: 0;
+}
+
+.esriSimpleSlider:hover {
+	background: rgb(76,76,76);
+	background: rgba(76,76,76,0.3);
 }
 
 .esriSimpleSlider div {
@@ -86,6 +90,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .esriSimpleSliderVertical .esriSimpleSliderDecrementButton {
 	background: url('../images/CatClawDown.png') center center no-repeat;
-	line-height: 14px;
+	line-height: 13px;
 	border-top: 3px solid transparent;
 }
