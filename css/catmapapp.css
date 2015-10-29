@@ -70,6 +70,7 @@ p { margin: 3px 0; }
 	left: 50%;
 	margin: -110px 0 0 -150px;
 	text-align: center;
+	padding: 30px 10px;
 }
 
 .cat-about.open {
